@@ -333,6 +333,7 @@ function loadSection(sectionName) {
     savedPosterSection.classList.add("hidden");
     mainPosterSection.classList.add("hidden");
     createPosterSection.classList.add("hidden");
+    displayUnmotivationalPosters();
   };
 };
 
@@ -381,7 +382,7 @@ function savePoster() {
 };
 
 function displaySavedPosters() {
-  savedPostersGrid.innerHTML = ``;
+  clearGrids();
   savedPosters.forEach((poster) => { 
       savedPostersGrid.innerHTML += `
       <article class="mini-poster">
@@ -392,6 +393,17 @@ function displaySavedPosters() {
   `});
 };
 
+function displayUnmotivationalPosters() {
+  clearGrids();
+  unmotivationalPosters.forEach((poster) => { 
+    unmotivationalPostersGrid.innerHTML += `
+      <article class="mini-poster">
+        <img src="${poster.imageURL}" id="${poster.id}">
+        <h2>${poster.title}</h1>
+        <h4>${poster.quote}</h3>
+      </article>
+  `})
+};
 
 function cleanData() {
   unmotivationalPosters.forEach((poster) => {
@@ -399,13 +411,9 @@ function cleanData() {
   });
   unmotivationalPosters.splice(0, 15);
 };
-
 cleanData();
-unmotivationalPosters.forEach((poster) => { 
-  unmotivationalPostersGrid.innerHTML += `
-    <article class="mini-poster">
-      <img src="${poster.imageURL}" id="${poster.id}">
-      <h2>${poster.title}</h1>
-      <h4>${poster.quote}</h3>
-    </article>
-`});
+
+function clearGrids() {
+  savedPostersGrid.innerHTML = ``;
+  unmotivationalPostersGrid.innerHTML = ``;
+};
