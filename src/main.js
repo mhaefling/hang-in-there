@@ -252,21 +252,19 @@ var currentPoster;
 
 // event listeners go here 👇
 document.addEventListener('DOMContentLoaded', loadRandomPoster);
-
 randomPosterButton.addEventListener('click', loadRandomPoster);
-
 makePosterButton.addEventListener('click', () => {loadSection(createPosterSection)}) ;
 nevermindButton.addEventListener('click', () => {loadSection(mainPosterSection)});
-
 savedPosterButton.addEventListener('click', () => {loadSection(savedPosterSection)});
 backToMainButton.addEventListener('click', () => {loadSection(mainPosterSection)});
-
 showMyPosterButton.addEventListener('click', createNewPosterData);
-
 saveNewPosterButton.addEventListener('click', savePoster);
-
 unmotivationalPosterButton.addEventListener('click', () => {loadSection(unmotivationalPosterSection)});
 backToMainButton2.addEventListener('click', () => {loadSection(mainPosterSection)});
+unmotivationalPostersGrid.addEventListener('dblclick', (event) => {
+  unmotivationalPosters.splice(event.target.classList, 1);
+  displayUnmotivationalPosters();
+});
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -395,14 +393,16 @@ function displaySavedPosters() {
 
 function displayUnmotivationalPosters() {
   clearGrids();
+  let countIndex = 0;
   unmotivationalPosters.forEach((poster) => { 
     unmotivationalPostersGrid.innerHTML += `
-      <article class="mini-poster">
-        <img src="${poster.imageURL}" id="${poster.id}">
-        <h2>${poster.title}</h1>
-        <h4>${poster.quote}</h3>
+      <article class="mini-poster ${countIndex}">
+        <img src="${poster.imageURL}" id="${poster.id}" class="${countIndex}">
+        <h2 class="${countIndex}">${poster.title}</h1>
+        <h4 class="${countIndex}">${poster.quote}</h3>
       </article>
-  `})
+  `
+  countIndex++})
 };
 
 function cleanData() {
