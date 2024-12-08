@@ -262,7 +262,8 @@ saveNewPosterButton.addEventListener('click', savePoster);
 unmotivationalPosterButton.addEventListener('click', () => {loadSection(unmotivationalPosterSection)});
 backToMainButton2.addEventListener('click', () => {loadSection(mainPosterSection)});
 unmotivationalPostersGrid.addEventListener('dblclick', (event) => {
-  unmotivationalPosters.splice(event.target.classList, 1);
+  selectedPoster = event.target
+  unmotivationalPosters.splice(selectedPoster.classList, 1);
   displayUnmotivationalPosters();
 });
 
@@ -396,7 +397,7 @@ function displayUnmotivationalPosters() {
   let countIndex = 0;
   unmotivationalPosters.forEach((poster) => { 
     unmotivationalPostersGrid.innerHTML += `
-      <article class="mini-poster ${countIndex}">
+      <article class="ump-mini-poster ${countIndex}">
         <img src="${poster.imageURL}" id="${poster.id}" class="${countIndex}">
         <h2 class="${countIndex}">${poster.title}</h1>
         <h4 class="${countIndex}">${poster.quote}</h3>
