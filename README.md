@@ -20,7 +20,9 @@
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off. gifs preferred!)
 
 - Checkout the section to create your own posters!
-![Uploading Screen Recording 2024-12-10 at 2.gif…]()
+![Screen Recording 2024-12-10 at 2](https://github.com/user-attachments/assets/b611b799-a43d-433a-9bf0-cce64a86d91a)
+
+
 
 ### Context:
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
