@@ -34,9 +34,9 @@
 ### Contributors:
 [//]: <> (Who worked on this application? Link to your GitHub. Consider also providing LinkedIn link)
 
-- Author: Matt Haefling \n
-https://github.com/mhaefling \n
-www.linkedin.com/in/matthew-haefling
+- Author: Matt Haefling
+- https://github.com/mhaefling 
+- www.linkedin.com/in/matthew-haefling
 
 ### Learning Goals:
 [//]: <> (What were the learning goals of this project? What tech did you work with?)
