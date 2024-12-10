@@ -151,23 +151,29 @@ button:hover {
 }
 
 .unmotivational-posters-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  /* display: grid; */
+  /* grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 20px;
 }
 
 .ump-mini-poster {
-  background: black;
+  background: gray;
   color: white;
   height: 340px;
   padding: 25px;
   width: 425px;
+  border-radius: 15px;
+  margin-bottom: 15px;
 }
 
 .ump-mini-poster img {
   height:200px;
   width: 300px;
+  margin-bottom: 20px;
 }
 
 .ump-mini-poster h2,
@@ -179,6 +185,7 @@ button:hover {
 }
 
 .ump-mini-poster h2 {
+  color: black;
   font-size: 30px;
   font-weight: normal;
   letter-spacing: 5px;
