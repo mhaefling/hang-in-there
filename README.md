@@ -44,7 +44,7 @@
 - Learning the basics of Front-End Development.
 - JavaScript, HTML, CSS, Chrome Dev Tools, VS Code
 
-- JavaScript - QuerySelectors, EventListeners, Functions, Loops
+- JavaScript - QuerySelectors, EventListeners, Functions, Loops, DOM Manipulation
 - CSS - Selectors (class, id, element), FlexBox
 - HTML structures, child, parent, garnd-parents
 
