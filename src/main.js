@@ -1,25 +1,34 @@
 // query selector variables go here 👇
+
+// Main Poster Section:
 let sectionMainPoster = document.querySelector(".main-poster");
-let sectionCreatePoster = document.querySelector(".poster-form");
-let sectionSavedPosters = document.querySelector(".saved-posters");
-let sectionUnmotivationalPosters = document.querySelector(".unmotivational-posters");
-let gridSavedPosters = document.querySelector(".saved-posters-grid");
-let gridUnmotivationalPosters = document.querySelector(".unmotivational-posters-grid");
 let posterImage = document.querySelector(".poster-img");
 let randomTitle = document.querySelector(".poster-title");
 let randomQuote = document.querySelector(".poster-quote");
+let buttonSavePoster = document.querySelector(".save-poster");
+let buttonShowSavedPosters = document.querySelector(".show-saved");
 let buttonRandomPoster = document.querySelector(".show-random");
 let buttonMakePoster = document.querySelector(".show-form");
-let buttonShowSavedPosters = document.querySelector(".show-saved");
-let buttonNevermind = document.querySelector(".show-main");
-let buttonSavedBackToMain = document.querySelector(".back-to-main");
-let buttonUnmotivationalBackToMain = document.querySelector(".back-to-main2");
-let buttonShowMyPoster = document.querySelector(".make-poster");
-let buttonSavePoster = document.querySelector(".save-poster");
 let buttonUnmotivationalPosters = document.querySelector(".show-unmotivational");
+
+// Saved Posters Section:
+let sectionSavedPosters = document.querySelector(".saved-posters");
+let gridSavedPosters = document.querySelector(".saved-posters-grid");
+let buttonSavedBackToMain = document.querySelector(".back-to-main");
+
+// Create Posters Section:
+let sectionCreatePoster = document.querySelector(".poster-form");
 let inputCustomImage = document.querySelector("#poster-image-url");
 let inputCustomTitle = document.querySelector("#poster-title");
 let inputCustomQuote = document.querySelector("#poster-quote");
+let buttonShowMyPoster = document.querySelector(".make-poster");
+let buttonNevermind = document.querySelector(".show-main");
+
+// Unmotivational Posters Section:
+let sectionUnmotivationalPosters = document.querySelector(".unmotivational-posters");
+let gridUnmotivationalPosters = document.querySelector(".unmotivational-posters-grid");
+let buttonUnmotivationalBackToMain = document.querySelector(".back-to-main2");
+
 
 
 // we've provided you with some data to work with 👇
@@ -44,6 +53,27 @@ var images = [
   "./assets/tiger.jpg",
   "./assets/turtle.jpg"
 ];
+
+var alts = [
+  "group of bees landing on a ledge", 
+  "bridge at night with a lot of traffic", 
+  "close up of a butterfly in the wild",
+  "mountain scene with a man standing at the edge of a cliff",
+  "group of two elephants in a field",
+  "flock of birds mid flight with the sun behind them",
+  "close up of a brown fox in a field",
+  "close up of a frog with red eyes sitting on a leaf",
+  "group of horses trotting down a path next to a paved walkway",
+  "lion laying in a field growling, with its mouth open showing its teeth",
+  "man standing looking at the range of mountains in front of him",
+  "trail surrounded by purple flowers leading to a lake with a pier",
+  "two puffins looking at each other surrounded by flowers",
+  "pug wrapped in a small blanket laying in bed",
+  "man jogging down the side of a road with the sun shining through the clouds",
+  "close up of a squirrel laying on a tree branch",
+  "close up of a tiger laying on a rock",
+  "sea turtle swimming under water"
+]
 
 var titles = [
   "determination",
@@ -251,21 +281,28 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
-document.addEventListener('DOMContentLoaded', loadRandomPoster);
-document.addEventListener('DOMContentLoaded', cleanData());
 
-buttonUnmotivationalPosters.addEventListener('click', () => {loadSection(sectionUnmotivationalPosters)});
-buttonShowSavedPosters.addEventListener('click', () => {loadSection(sectionSavedPosters)});
-buttonMakePoster.addEventListener('click', () => {loadSection(sectionCreatePoster)});
-buttonUnmotivationalBackToMain.addEventListener('click', () => {loadSection(sectionMainPoster)});
-buttonSavedBackToMain.addEventListener('click', () => {loadSection(sectionMainPoster)});
-buttonNevermind.addEventListener('click', () => {loadSection(sectionMainPoster)});
+// Page Load Events
+document.addEventListener('DOMContentLoaded', onPageLoad());
 
-buttonShowMyPoster.addEventListener('click', loadNewPoster);
-buttonRandomPoster.addEventListener('click', loadRandomPoster);
+// Main Section Events
 buttonSavePoster.addEventListener('click', savePoster);
+buttonShowSavedPosters.addEventListener('click', () => {loadSection(sectionSavedPosters, sectionMainPoster)});
+buttonRandomPoster.addEventListener('click', createRandomPoster);
+buttonMakePoster.addEventListener('click', () => {loadSection(sectionCreatePoster, sectionMainPoster)});
+buttonUnmotivationalPosters.addEventListener('click', () => {loadSection(sectionUnmotivationalPosters, sectionMainPoster)});
 
+// Saved Section Events
+buttonSavedBackToMain.addEventListener('click', () => {loadSection(sectionMainPoster, sectionSavedPosters)});
+
+// Create Posters Section Events
+buttonShowMyPoster.addEventListener('click', loadNewPoster);
+buttonNevermind.addEventListener('click', () => {loadSection(sectionMainPoster, sectionCreatePoster)});
+
+// Unmotivational Posters Section Events
 gridUnmotivationalPosters.addEventListener('dblclick', deletePoster);
+buttonUnmotivationalBackToMain.addEventListener('click', () => {loadSection(sectionMainPoster, sectionUnmotivationalPosters)});
+
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -275,60 +312,56 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
-// applyRandomPosterImage assigns the element returned from the getRandomPoster function to the .src attribute of the posterImage variable.
-function applyRandomPosterImage() {
-  return posterImage.src = images[getRandomIndex(images)];
-};
-
-// applyRandomPosterTitle assigns the element returned from the getRandomTitle function to the .innerText attribute of the randomTitle variable.
-function applyRandomPosterTitle() {
-  return randomTitle.innerText = titles[getRandomIndex(titles)];
-};
-
-// applyRandomPosterQuote assigns the element returned from the getRandomQuote function to the .innerText attribute of the randomQuote variable.
-function applyRandomPosterQuote() {
-  return randomQuote.innerText = quotes[getRandomIndex(quotes)];
-};
-
-// loadRandomPoster calls three helper methods applyRandomPosterImage, applyRandomPosterTitle, applyRandomPosterQuote, and is used when the page loads and when the "Show Another Random Poster" button is clicked to randomly generate a new poster.
-function loadRandomPoster() {
-  currentPoster = createPoster(applyRandomPosterImage(), applyRandomPosterTitle(), applyRandomPosterQuote());
-};
-
-// loadSection takes in a single argument, which is the variable name of the query selected section element to be loaded, 
-// based on the section that was passed into it, it will remove the "hidden" class from that section and add the hidden class to all other sections.
-function loadSection(sectionName) {
-  if (sectionName === sectionMainPoster) {
-    sectionMainPoster.classList.toggle("hidden");
-    sectionCreatePoster.classList.add("hidden");
-    sectionSavedPosters.classList.add("hidden");
-    sectionUnmotivationalPosters.classList.add("hidden");
-  } else if (sectionName === sectionCreatePoster) {
-    sectionCreatePoster.classList.toggle("hidden");
-    sectionMainPoster.classList.add("hidden");
-    sectionSavedPosters.classList.add("hidden");
-    sectionUnmotivationalPosters.classList.add("hidden");
-  } else if (sectionName === sectionSavedPosters) {
-    sectionSavedPosters.classList.toggle("hidden");
-    sectionMainPoster.classList.add("hidden");
-    sectionCreatePoster.classList.add("hidden");
-    sectionUnmotivationalPosters.classList.add("hidden");
-    displaySavedPosters();
-  } else if (sectionName === sectionUnmotivationalPosters) {
-    sectionUnmotivationalPosters.classList.toggle("hidden");
-    sectionSavedPosters.classList.add("hidden");
-    sectionMainPoster.classList.add("hidden");
-    sectionCreatePoster.classList.add("hidden");
-    displayUnmotivationalPosters();
-  };
-};
-
+// createPoster takes three arguments, imageURL, title, quote, and uses them to create an object with properties that represents a poster. It also adds its own properity called id using Date.now
 function createPoster(imageURL, title, quote) {
   return {
     id: Date.now(), 
     imageURL: imageURL, 
     title: title, 
     quote: quote}
+};
+
+// onPageLoad calls two functions 1. createRandonPoster to display a random poster on the main section 2. cleanData to clean the unmotivationalPosters array.
+function onPageLoad() {
+  createRandomPoster();
+  cleanData();
+};
+
+// createRandomPoster creates three variables imageURL, title, quote, all of which use the getRandomIndex function to pull a random index from the images, titles, and quotes arrays.
+// It then assigns the currentPoster variable by calling the createPoster function giving it those three variables as arguments.
+// it finally calls the function loadPoster that assigns the random picture, title and quote to the main section to be displayed.
+function createRandomPoster() {
+  let imageURL = images[getRandomIndex(images)];
+  let title = titles[getRandomIndex(titles)];
+  let quote = quotes[getRandomIndex(quotes)];
+  currentPoster = createPoster(imageURL, title, quote);
+  loadPoster();
+};
+
+// loadPoster assigns the image src, h1 content, and h3 content for the mainPoster section based on the values of what is currently stored in the currentPoster variable.
+function loadPoster() {
+  posterImage.src = currentPoster.imageURL;
+  posterImage.alt = alts[images.indexOf(currentPoster.imageURL)]
+  randomTitle.innerText = currentPoster.title;
+  randomQuote.innerText = currentPoster.quote;
+
+};
+
+// loadSection takes in two different arguments, sectionToLoad and sectionToHide. sectionToLoad is toggled to remove its "hidden" class, sectionToHide has the "hidden" class applied.
+// if the sectionToLoad is "sectionSavedPosters" it also calls the displaySavedPosters() and if sectionToLoad is "sectionUnmotivationalPosters" it also calls the displayUnmotivationalPosters() function.
+function loadSection(sectionToLoad, sectionToHide) {
+  if (sectionToLoad === sectionSavedPosters) {
+    sectionToLoad.classList.toggle("hidden");
+    sectionToHide.classList.add("hidden");
+    displaySavedPosters();
+  } else if (sectionToLoad === sectionUnmotivationalPosters) {
+    sectionToLoad.classList.toggle("hidden");
+    sectionToHide.classList.add("hidden");
+    displayUnmotivationalPosters();
+  } else {
+    sectionToLoad.classList.toggle("hidden");
+    sectionToHide.classList.add("hidden");
+  };
 };
 
 // createPosterImage saves the url provided to a block variable imageURL, adds its value to the images array for further use creating random posters, and returns its value to be used in the loadNewPoster function.
@@ -353,14 +386,12 @@ function createPosterQuote() {
 };
 
 // loadNewPoster sets the currentPoster to the value of the object returned by the createPoster function, providing it the return values of the createPosterImage, createPosterTitle, createPosterQuote functions.
-// it then reloads the mainPoster section, and manually inserts and displays the custom created poster by directly assigning the currentposter object values to the html elements in that section.
+// it then reloads the mainPoster section, and calls the loadPoster function to display the new poster.
 function loadNewPoster() {
   event.preventDefault();
   currentPoster = createPoster(createPosterImage(), createPosterTitle(), createPosterQuote());
-  loadSection(sectionMainPoster);
-  posterImage.src = currentPoster.imageURL;
-  randomTitle.innerText = currentPoster.title;
-  randomQuote.innerText = currentPoster.quote;
+  loadSection(sectionMainPoster, sectionCreatePoster);
+  loadPoster();
 };
 
 // savePoster allows the user to save their custom made posters to the savedPosters array so that they can be displayed in the saved posters section.
@@ -377,7 +408,7 @@ function savePoster() {
 // displaySavedPosters clears the grid of the savedPosters section and then uses a forEach to iterate through the savedPosters array to create an article element /mini-posters to be displayed to the user.
 // it clears the grid at the begginning to prevent duplicating all the saved posters when going back and forth between the main section and saved poster section.
 function displaySavedPosters() {
-  clearGrids();
+  cleanGrids();
   savedPosters.forEach((poster) => { 
       gridSavedPosters.innerHTML += `
       <article class="mini-poster">
@@ -392,7 +423,7 @@ function displaySavedPosters() {
 // displayUnmotivationalPosters starts by clearing the grid of the unmotivational posters section and then uses a forEach to iterate through the unmotivationalPosters array to create an article element /mini-poster
 // to be displayed to the user. It clears the grid at the begginning to prevent duplicating all the unmotivational posters when going back and forth between the main section and unmotivational posters section.
 function displayUnmotivationalPosters() {
-  clearGrids();
+  cleanGrids();
   let countIndex = 0;
   unmotivationalPosters.forEach((poster) => { 
     gridUnmotivationalPosters.innerHTML += `
@@ -415,8 +446,8 @@ function cleanData() {
   unmotivationalPosters.splice(0, 15);
 };
 
-// clearGrids simply clears both the saved posters and unmotivational posters div elements and is used as a helper methods when calling the savedPosters Section and unmotivational posters section to prevent duplication.
-function clearGrids() {
+// cleanGrids simply clears both the saved posters and unmotivational posters div elements and is used as a helper methods when calling the savedPosters Section and unmotivational posters section to prevent duplication.
+function cleanGrids() {
   gridSavedPosters.innerHTML = ``;
   gridUnmotivationalPosters.innerHTML = ``;
 };
