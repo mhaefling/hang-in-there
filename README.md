@@ -5,7 +5,8 @@
 
 #### Motivational Poster Generator
 - A lot of people seek motivation by looking for motivational content.
-- This App allows a user to add image url's from anywhere, and add their own motivational quotes and titles to create motivational posters or randomly generate motivational posters. 
+- This App allows a user to add image url's from anywhere, and add their own motivational quotes and titles to create motivational posters or randomly generate motivational posters.
+- This app also has a humorous unmotivational posters section, however if you find any of them offensive or rude you are able to double click them and have them removed.
 
 ### Installation Instructions:
 [//]: <> (What steps does a person have to take to get your app cloned down and running?)
