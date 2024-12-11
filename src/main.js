@@ -54,6 +54,27 @@ var images = [
   "./assets/turtle.jpg"
 ];
 
+var alts = [
+  "group of bees landing on a ledge", 
+  "bridge at night with a lot of traffic", 
+  "close up of a butterfly in the wild",
+  "mountain scene with a man standing at the edge of a cliff",
+  "group of two elephants in a field",
+  "flock of birds mid flight with the sun behind them",
+  "close up of a brown fox in a field",
+  "close up of a frog with red eyes sitting on a leaf",
+  "group of horses trotting down a path next to a paved walkway",
+  "lion laying in a field growling, with its mouth open showing its teeth",
+  "man standing looking at the range of mountains in front of him",
+  "trail surrounded by purple flowers leading to a lake with a pier",
+  "two puffins looking at each other surrounded by flowers",
+  "pug wrapped in a small blanket laying in bed",
+  "man jogging down the side of a road with the sun shining through the clouds",
+  "close up of a squirrel laying on a tree branch",
+  "close up of a tiger laying on a rock",
+  "sea turtle swimming under water"
+]
+
 var titles = [
   "determination",
   "success",
@@ -320,8 +341,10 @@ function createRandomPoster() {
 // loadPoster assigns the image src, h1 content, and h3 content for the mainPoster section based on the values of what is currently stored in the currentPoster variable.
 function loadPoster() {
   posterImage.src = currentPoster.imageURL;
+  posterImage.alt = alts[images.indexOf(currentPoster.imageURL)]
   randomTitle.innerText = currentPoster.title;
   randomQuote.innerText = currentPoster.quote;
+
 };
 
 // loadSection takes in two different arguments, sectionToLoad and sectionToHide. sectionToLoad is toggled to remove its "hidden" class, sectionToHide has the "hidden" class applied.
